@@ -1,0 +1,20 @@
+.whySection {
+  margin-top: 2.5rem;
+  background-color: var(--deep-green);
+  padding: 4rem 5rem;
+  margin-bottom: 8rem;
+}
+
+.whyTitle {
+  font-size: 2rem;
+  margin: 0;
+  text-align: center;
+  color: var(--cream);
+  margin-bottom: 2rem;
+}
+
+.reasonsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+}

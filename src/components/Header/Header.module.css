@@ -1,0 +1,52 @@
+.header {
+  background-color: var(--deep-green);
+  padding: 1.2rem 3rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+.logo {
+  text-decoration: none;
+  color: var(--cream);
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+}
+
+.navBar {
+  display: flex;
+  gap: 4rem;
+}
+
+.navBar a {
+  color: var(--cream);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.navBar a:hover {
+  color: var(--terracotta);
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 0.8rem 1.2rem;
+  }
+
+  .logo {
+    font-size: 1rem;
+  }
+
+  .navBar {
+    gap: 1rem;
+  }
+}

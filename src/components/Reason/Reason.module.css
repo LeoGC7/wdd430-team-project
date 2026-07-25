@@ -1,0 +1,28 @@
+.reasonCard {
+  width: 200px;
+  text-align: center;
+  padding: 1rem;
+  border: 1px solid var(--cream);
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reasonIcon {
+  margin: 0;
+  margin-bottom: 0.5rem;
+}
+
+.reasonTitle {
+  font-family: var(--font-heading);
+  color: var(--cream);
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.reasonText {
+  color: var(--cream);
+  font-weight: 200;
+}

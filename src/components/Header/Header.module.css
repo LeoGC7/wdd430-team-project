@@ -25,6 +25,7 @@
 .navBar {
   display: flex;
   gap: 4rem;
+  align-items: center;
 }
 
 .navBar a {
@@ -35,6 +36,24 @@
 
 .navBar a:hover {
   color: var(--terracotta);
+}
+
+.greeting {
+  color: var(--cream);
+}
+
+.signOutButton {
+  background-color: var(--cream);
+  color: var(--deep-green);
+  border: none;
+  padding: 0.3rem 1rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.signOutButton:hover {
+  background-color: #dfd7ca;
 }
 
 @media screen and (max-width: 768px) {

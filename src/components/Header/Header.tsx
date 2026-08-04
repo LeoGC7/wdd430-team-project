@@ -1,7 +1,10 @@
 import styles from "./Header.module.css";
 import Link from "next/link";
+import { auth, signOut } from "../../../auth";
 
-export default function Header() {
+export default async function Header() {
+  const session = await auth();
+
   return (
     <header className={styles.header}>
       <div className={styles.wrapper}>
@@ -18,9 +21,27 @@ export default function Header() {
           <Link className={styles.navLink} href={"/about"}>
             About
           </Link>
-          <Link className={styles.navLink} href={"/login"}>
-            Login
-          </Link>
+          {session?.user ? (
+            <>
+              <span className={styles.greeting}>
+                Hi, {session.user.name?.split(" ")[0] ?? "User"}
+              </span>
+              <form
+                action={async () => {
+                  "use server";
+                  await signOut({ redirectTo: "/" });
+                }}
+              >
+                <button type="submit" className={styles.signOutButton}>
+                  Sign Out
+                </button>
+              </form>
+            </>
+          ) : (
+            <Link className={styles.navLink} href={"/login"}>
+              Login
+            </Link>
+          )}
         </nav>
       </div>
     </header>

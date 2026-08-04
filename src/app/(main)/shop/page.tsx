@@ -1,5 +1,5 @@
-import { sql } from "../lib/db";
-import { Product } from "../lib/definitions";
+import { sql } from "../../lib/db";
+import { Product } from "../../lib/definitions";
 import ProductCard from "@/components/ProductCard/ProductCard";
 import Link from "next/link";
 import styles from "./page.module.css";

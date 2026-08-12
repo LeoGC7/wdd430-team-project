@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+import { auth } from "../../../auth";
 import { sql } from "./db";
 import {
   Product,
@@ -69,4 +71,71 @@ export async function fetchReviewsForProduct(productId: string) {
         ORDER BY reviews.created_at DESC
     `;
   return reviews;
+}
+
+export async function fetchUserByEmail(email: string) {
+  try {
+    const users = await sql<User[]>`
+      SELECT id, name, email, role, joined_date
+      FROM users
+      WHERE email = ${email}
+      LIMIT 1
+    `;
+    return users[0];
+  } catch (error) {
+    console.error("Error fetching user by email:", error);
+    return undefined;
+  }
+}
+
+export async function fetchAllCategories() {
+  try {
+    const categories = await sql<{ id: string; name: string; slug: string }[]>`
+        SELECT id, name, slug FROM categories ORDER BY name ASC
+      `;
+    return categories;
+  } catch (error) {
+    console.error("Error fetching categorties:", error);
+    return [];
+  }
+}
+
+export async function requireSeller() {
+  const session = await auth();
+
+  if (!session?.user?.email) {
+    redirect("/login");
+  }
+
+  const dbUser = await fetchUserByEmail(session.user.email);
+
+  if (!dbUser) {
+    redirect("/login");
+  }
+
+  if (dbUser.role !== "seller" && dbUser.role !== "admin") {
+    redirect("/shop");
+  }
+
+  return dbUser;
+}
+
+export async function requireSellerAction() {
+  const session = await auth();
+
+  if (!session?.user?.email) {
+    throw new Error("Not authenticated");
+  }
+
+  const dbUser = await fetchUserByEmail(session.user.email);
+
+  if (!dbUser) {
+    throw new Error("User not found");
+  }
+
+  if (dbUser.role !== "seller" && dbUser.role !== "admin") {
+    throw new Error("Only sellers can perform this action");
+  }
+
+  return dbUser;
 }

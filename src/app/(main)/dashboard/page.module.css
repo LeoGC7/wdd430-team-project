@@ -1,16 +1,152 @@
 .main {
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  min-height: 60vh;
+}
+
+.header {
   display: flex;
-  flex-direction: column;
-  flex-grow: 1;
   align-items: center;
-  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .title {
+  font-family: var(--font-heading);
   color: var(--deep-green);
-  margin: 0;
+  font-size: 2.5rem;
+  margin: 0 0 0.5rem 0;
 }
 
 .subtitle {
-  color: var(--grey);
+  color: var(--black);
+  opacity: 0.7;
+  margin: 0;
+}
+
+.createButton {
+  background-color: var(--terracotta);
+  color: var(--cream);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+
+.createButton:hover {
+  opacity: 0.9;
+}
+
+.productsSection {
+  margin-top: 2rem;
+}
+
+.sectionTitle {
+  font-family: var(--font-heading);
+  color: var(--deep-green);
+  font-size: 1.5rem;
+  margin: 0 0 1.5rem 0;
+}
+
+.productsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.productRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fafafa;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.productInfo {
+  flex-grow: 1;
+  min-width: 200px;
+}
+
+.productTitle {
+  font-family: var(--font-heading);
+  color: var(--deep-green);
+  font-size: 1.2rem;
+  margin: 0 0 0.25rem 0;
+}
+
+.productPrice {
+  color: var(--terracotta);
+  font-weight: 600;
+  margin: 0;
+}
+
+.productActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.viewButton,
+.editButton,
+.deleteButton {
+  padding: 0.4rem 1rem;
+  border-radius: 0.3rem;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.viewButton {
+  background-color: white;
+  color: var(--deep-green);
+  border-color: var(--deep-green);
+}
+
+.viewButton:hover {
+  background-color: var(--deep-green);
+  color: white;
+}
+
+.editButton {
+  background-color: var(--terracotta);
+  color: var(--cream);
+  border-color: var(--terracotta);
+}
+
+.editButton:hover {
+  opacity: 0.9;
+}
+
+.deleteButton {
+  background-color: white;
+  color: var(--red);
+  border-color: var(--red);
+}
+
+.deleteButton:hover:not(:disabled) {
+  background-color: var(--red);
+  color: white;
+}
+
+.deleteButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.emptyState {
+  text-align: center;
+  color: var(--black);
+  opacity: 0.6;
+  font-style: italic;
+  padding: 3rem 2rem;
+  background-color: #fafafa;
+  border-radius: 1rem;
 }

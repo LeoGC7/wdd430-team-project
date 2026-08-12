@@ -2,7 +2,7 @@ const users = [
   {
     id: "66f51730-88b2-43e6-9419-e6c17c7b068e",
     name: "Leonardo Aragaki",
-    email: "leo@example.com",
+    email: "leonardo.gameiro.correa@gmail.com",
     password: "password123",
     role: "admin",
     joined_date: "2025-08-15",
@@ -167,7 +167,7 @@ const products = [
   },
   {
     id: "e5f6a7b8-c9d0-1e2f-3a4b-5c6d7e8f9a0c",
-    seller_id: "7b8c9d0e-1f2a-4b5c-8d6e-7f8a9b0c1d2e",
+    seller_id: "66f51730-88b2-43e6-9419-e6c17c7b068e",
     category_id: "97cd7322-2a77-4fc1-887c-12d67d45518e",
     title: "Glazed Flower Vase",
     description:
@@ -177,7 +177,7 @@ const products = [
   },
   {
     id: "f6a7b8c9-d0e1-2f3a-4b5c-6d7e8f9a0b1d",
-    seller_id: "7b8c9d0e-1f2a-4b5c-8d6e-7f8a9b0c1d2e",
+    seller_id: "66f51730-88b2-43e6-9419-e6c17c7b068e",
     category_id: "9f3347cf-4d5d-433d-8292-635f546a29ec",
     title: "Macramé Wall Hanging",
     description:

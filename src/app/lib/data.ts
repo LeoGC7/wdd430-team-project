@@ -1,0 +1,72 @@
+import { sql } from "./db";
+import {
+  Product,
+  User,
+  ProductWithDetails,
+  ReviewWithUser,
+} from "./definitions";
+
+export async function fetchAllProducts() {
+  const products = await sql<Product[]>`
+        SELECT * FROM products ORDER BY created_at DESC
+    `;
+  return products;
+}
+
+export async function fetchProductById(id: string) {
+  try {
+    const products = await sql<ProductWithDetails[]>`
+            SELECT
+                products.*,
+                users.name AS seller_name,
+                categories.name AS category_name,
+                categories.slug AS category_slug
+            FROM products
+            JOIN users ON products.seller_id = users.id
+            JOIN categories ON products.category_id = categories.id
+            WHERE products.id = ${id}
+            LIMIT 1
+        `;
+    return products[0];
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    return undefined;
+  }
+}
+
+export async function fetchProductsBySeller(sellerId: string) {
+  const products = await sql<Product[]>`
+        SELECT * FROM products
+        WHERE seller_id = ${sellerId}
+        ORDER BY created_at DESC
+    `;
+  return products;
+}
+
+export async function fetchSellerById(id: string) {
+  try {
+    const users = await sql<User[]>`
+            SELECT id, name, email, role, joined_date
+            FROM users
+            WHERE id = ${id}
+            LIMIT 1
+        `;
+    return users[0];
+  } catch (error) {
+    console.error("Error fetching seller:", error);
+    return undefined;
+  }
+}
+
+export async function fetchReviewsForProduct(productId: string) {
+  const reviews = await sql<ReviewWithUser[]>`
+        SELECT
+            reviews.*,
+            users.name AS user_name
+        FROM reviews
+        JOIN users ON reviews.user_id = users.id
+        WHERE reviews.product_id = ${productId}
+        ORDER BY reviews.created_at DESC
+    `;
+  return reviews;
+}

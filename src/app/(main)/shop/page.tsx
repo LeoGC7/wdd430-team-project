@@ -1,13 +1,10 @@
-import { sql } from "../../lib/db";
-import { Product } from "../../lib/definitions";
 import ProductCard from "@/components/ProductCard/ProductCard";
 import Link from "next/link";
 import styles from "./page.module.css";
+import { fetchAllProducts } from "@/app/lib/data";
 
 export default async function ShopPage() {
-  const products = await sql<Product[]>`
-        SELECT * FROM products ORDER BY created_at DESC;
-    `;
+  const products = await fetchAllProducts();
 
   return (
     <main className={styles.main}>

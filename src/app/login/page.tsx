@@ -1,9 +1,13 @@
 "use client";
 
 import { signIn } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 import styles from "./page.module.css";
 
 export default function LoginPage() {
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") ?? "/dashboard";
+
   return (
     <main className={styles.main}>
       <div className={styles.loginCard}>
@@ -13,7 +17,7 @@ export default function LoginPage() {
         </p>
         <button
           className={styles.loginButton}
-          onClick={() => signIn("github", { callbackUrl: "/dashboard" })}
+          onClick={() => signIn("github", { callbackUrl })}
         >
           Sign in with GitHub
         </button>

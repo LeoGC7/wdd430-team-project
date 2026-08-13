@@ -23,9 +23,9 @@ export default async function Header() {
           </Link>
           {session?.user ? (
             <>
-              <span className={styles.greeting}>
+              <a className={styles.greeting} href="/dashboard">
                 Hi, {session.user.name?.split(" ")[0] ?? "User"}
-              </span>
+              </a>
               <form
                 action={async () => {
                   "use server";

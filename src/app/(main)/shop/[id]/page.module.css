@@ -209,3 +209,23 @@
   margin: 0;
   padding: 1rem 0;
 }
+
+.reviewPrompt {
+  background-color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 0.6rem;
+  border: 1px solid #e5e5e5;
+  margin: 0 0 1.5rem 0;
+  color: var(--black);
+  font-size: 0.95rem;
+}
+
+.reviewPromptLink {
+  color: var(--terracotta);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.reviewPromptLink:hover {
+  text-decoration: underline;
+}

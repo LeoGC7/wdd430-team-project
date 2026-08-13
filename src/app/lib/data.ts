@@ -139,3 +139,32 @@ export async function requireSellerAction() {
 
   return dbUser;
 }
+
+export async function fetchRawProductById(id: string) {
+  try {
+    const products = await sql<Product[]>`
+      SELECT * FROM products WHERE id = ${id} LIMIT 1
+    `;
+    return products[0];
+  } catch (error) {
+    console.error("There was an error fetching product:", error);
+    return undefined;
+  }
+}
+
+export async function hasUserReviewedProduct(
+  userId: string,
+  productId: string,
+) {
+  try {
+    const reviews = await sql<{ id: string }[]>`
+            SELECT id FROM reviews
+            WHERE user_id = ${userId} AND product_id = ${productId}
+            LIMIT 1
+        `;
+    return reviews.length > 0;
+  } catch (error) {
+    console.error("Error checking review:", error);
+    return false;
+  }
+}

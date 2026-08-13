@@ -1,9 +1,16 @@
 import styles from "./page.module.css";
-import { fetchProductById, fetchReviewsForProduct } from "@/app/lib/data";
+import {
+  fetchProductById,
+  fetchReviewsForProduct,
+  fetchUserByEmail,
+  hasUserReviewedProduct,
+} from "@/app/lib/data";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import ReviewCard from "@/components/ReviewCard/ReviewCard";
+import { auth } from "../../../../../auth";
+import ReviewForm from "@/components/ReviewForm/ReviewForm";
 
 export default async function ProductDetailPage({
   params,
@@ -22,6 +29,17 @@ export default async function ProductDetailPage({
     reviews.length > 0
       ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
       : 0;
+
+  const session = await auth();
+  let currentDbUser = null;
+  let alreadyReviewed = false;
+
+  if (session?.user?.email) {
+    currentDbUser = await fetchUserByEmail(session.user.email);
+    if (currentDbUser) {
+      alreadyReviewed = await hasUserReviewedProduct(currentDbUser.id, id);
+    }
+  }
 
   return (
     <main className={styles.main}>
@@ -63,13 +81,31 @@ export default async function ProductDetailPage({
                   <p className={styles.priceText}>Price</p>
                   <p className={styles.priceValue}>${product.price}</p>
                 </div>
-                <button className={styles.reviewButton}>+ Review</button>
               </div>
             </div>
           </aside>
         </div>
         <section className={styles.reviewsWrapper}>
           <p className={styles.reviewsTitle}>Reviews ({reviews.length})</p>
+
+          {!currentDbUser ? (
+            <p className={styles.reviewPrompt}>
+              <Link
+                href={`/login?callbackUrl=/shop/${id}`}
+                className={styles.reviewPromptLink}
+              >
+                Sign in
+              </Link>{" "}
+              to leave a review.
+            </p>
+          ) : alreadyReviewed ? (
+            <p className={styles.reviewPrompt}>
+              You've already reviewed this product. Thank you!
+            </p>
+          ) : (
+            <ReviewForm productId={id} />
+          )}
+
           <div className={styles.reviewsContainer}>
             {reviews.length === 0 ? (
               <p className={styles.noReviews}>

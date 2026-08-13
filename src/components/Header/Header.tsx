@@ -18,9 +18,6 @@ export default async function Header() {
           <Link className={styles.navLink} href={"/shop"}>
             Shop
           </Link>
-          <Link className={styles.navLink} href={"/about"}>
-            About
-          </Link>
           {session?.user ? (
             <>
               <a className={styles.greeting} href="/dashboard">

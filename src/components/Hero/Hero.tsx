@@ -13,8 +13,12 @@ export default function Hero() {
         laboriosam soluta.
       </p>
       <div className={styles.btnContainer}>
-        <button className={styles.btnPrimary}>Browse Products</button>
-        <button className={styles.btnSecondary}>Become a Seller</button>
+        <Link href="/shop">
+          <button className={styles.btnPrimary}>Browse Products</button>
+        </Link>
+        <Link href="/login">
+          <button className={styles.btnSecondary}>Become a Seller</button>
+        </Link>
       </div>
     </section>
   );

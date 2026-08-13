@@ -31,6 +31,14 @@
   height: 100%;
 }
 
+.noResults {
+  text-align: center;
+  color: var(--black);
+  opacity: 0.6;
+  font-style: italic;
+  padding: 3rem 0;
+}
+
 @media screen and (max-width: 1024px) {
   .productsContainer {
     grid-template-columns: repeat(3, 1fr);

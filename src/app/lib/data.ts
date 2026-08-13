@@ -8,7 +8,18 @@ import {
   ReviewWithUser,
 } from "./definitions";
 
-export async function fetchAllProducts() {
+export async function fetchAllProducts(query?: string) {
+  if (query && query.trim().length > 0) {
+    const searchTerm = `%${query.trim()}%`;
+    const products = await sql<Product[]>`
+            SELECT * FROM products
+            WHERE title ILIKE ${searchTerm}
+               OR description ILIKE ${searchTerm}
+            ORDER BY created_at DESC
+        `;
+    return products;
+  }
+
   const products = await sql<Product[]>`
         SELECT * FROM products ORDER BY created_at DESC
     `;
